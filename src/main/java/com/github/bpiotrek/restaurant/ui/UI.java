@@ -66,6 +66,7 @@ public class UI {
     }
 
     private void runMenu(MenuView menu) {
+        write("   --- " + menu.getMenuTitle() + " ---   \n");
         write(menu.getMenuText());
         if (invalidInput) {
             write("response not understood: " + lastInput + "\n");
