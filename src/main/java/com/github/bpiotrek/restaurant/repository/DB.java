@@ -15,6 +15,7 @@ public class DB {
     private final Map<Integer, MealEntity> meals = new HashMap<>();
     private int restaurantCounter = 0;
     private int mealCounter = 0;
+
     private DB() {
         insertRestaurant(new Restaurant("Kebab u grubego", "Warszawska 11, Kraków 31-222", RestaurantType.TURKISH));
         insertRestaurant(new Restaurant("Milano Pizza", "Sobczyka 12/3, Warszawa 33-312", RestaurantType.ITALIAN));
@@ -57,5 +58,14 @@ public class DB {
 
     public Collection<MealEntity> listMeals(int restaurantID) {
         return meals.values().stream().filter(m -> m.restaurantID() == restaurantID).toList();
+    }
+
+    public boolean hasRestaurant(final int restaurantID) {
+        return restaurants.containsKey(restaurantID);
+    }
+
+    public void updateRestaurantName(final int restaurantID, final String newName) {
+        final var restaurant = restaurants.get(restaurantID);
+        restaurants.put(restaurantID, new RestaurantEntity(restaurantID, new Restaurant(newName, restaurant.address(), restaurant.type())));
     }
 }
