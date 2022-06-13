@@ -19,6 +19,10 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
+tasks.getByName<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 application {
     mainClass.set("com.github.bpiotrek.restaurant.Main")
 }
