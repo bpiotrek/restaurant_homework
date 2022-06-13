@@ -1,12 +1,12 @@
 package com.github.bpiotrek.restaurant.ui;
 
-import com.github.bpiotrek.restaurant.model.RestaurantBuilder;
+import com.github.bpiotrek.restaurant.repository.RestaurantEntityBuilder;
 
 public class SetNewRestaurantNameMenu extends MenuView {
 
-    private final RestaurantBuilder restaurantBuilder;
+    private final RestaurantEntityBuilder restaurantBuilder;
 
-    public SetNewRestaurantNameMenu(final RestaurantBuilder builder) {
+    public SetNewRestaurantNameMenu(final RestaurantEntityBuilder builder) {
         this.restaurantBuilder = builder;
     }
 

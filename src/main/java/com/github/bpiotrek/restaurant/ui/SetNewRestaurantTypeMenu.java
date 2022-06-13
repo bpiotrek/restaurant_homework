@@ -1,22 +1,22 @@
 package com.github.bpiotrek.restaurant.ui;
 
-import com.github.bpiotrek.restaurant.model.RestaurantBuilder;
 import com.github.bpiotrek.restaurant.model.RestaurantType;
+import com.github.bpiotrek.restaurant.repository.RestaurantEntityBuilder;
 
 import java.util.Arrays;
 
 public class SetNewRestaurantTypeMenu extends MenuView {
 
-    private final RestaurantBuilder restaurantBuilder;
+    private final RestaurantEntityBuilder restaurantBuilder;
 
-    public SetNewRestaurantTypeMenu(final RestaurantBuilder builder) {
+    public SetNewRestaurantTypeMenu(final RestaurantEntityBuilder builder) {
         this.restaurantBuilder = builder;
     }
 
     @Override
     public String getMenuText() {
         return "Available types: "
-                + Arrays.stream(RestaurantType.values()).map(obj -> obj.toString().toLowerCase()).toList()
+                + Arrays.stream(RestaurantType.values()).map(RestaurantType::toString).toList()
                 + "\n";
     }
 
@@ -28,7 +28,7 @@ public class SetNewRestaurantTypeMenu extends MenuView {
     @Override
     public void acceptInput(final String input) {
         RestaurantType type;
-        if(input.isBlank()) {
+        if (input.isBlank()) {
             type = RestaurantType.TURKISH;
         } else {
             try {
@@ -42,10 +42,10 @@ public class SetNewRestaurantTypeMenu extends MenuView {
         final var restaurant = restaurantBuilder.build();
         setTransition(new ConfirmationScreen(
                 "Are you sure you want to add new restaurnant with following parameters?\n"
-                + "Restaurant name: " + restaurant.name() + "\n"
-                + "Restaurant address: " + restaurant.address() + "\n"
-                + "Restaurant type: " + restaurant.type().toString().toLowerCase() + "\n",
-                () -> {}
+                        + "Restaurant name: " + restaurant.name() + "\n"
+                        + "Restaurant address: " + restaurant.address() + "\n"
+                        + "Restaurant type: " + restaurant.type().toString() + "\n",
+                restaurantBuilder::insert
         ));
     }
 }

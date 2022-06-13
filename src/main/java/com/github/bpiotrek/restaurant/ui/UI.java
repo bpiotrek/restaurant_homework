@@ -1,8 +1,11 @@
 package com.github.bpiotrek.restaurant.ui;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class UI {
+
     private final BufferedWriter outputWriter;
     private final BufferedReader inputReader;
     private final MenuView mainMenu;
@@ -64,18 +67,18 @@ public class UI {
 
     private void runMenu(MenuView menu) {
         write(menu.getMenuText());
-        if(invalidInput) {
+        if (invalidInput) {
             write("response not understood: " + lastInput + "\n");
             invalidInput = false;
         }
         write(menu.getMenuPrompt());
         flush();
         menu.acceptInput(getInput());
-        if(stopApplication || invalidInput) {
+        if (stopApplication || invalidInput) {
             return;
         }
         currentMenu = menu.getTransition();
-        if(currentMenu == null) {
+        if (currentMenu == null) {
             currentMenu = mainMenu;
         }
     }
@@ -84,7 +87,7 @@ public class UI {
         do {
             clearScreen();
             runMenu(currentMenu);
-        } while(!stopApplication);
+        } while (!stopApplication);
         writeMessage("Bye, bye!");
     }
 }

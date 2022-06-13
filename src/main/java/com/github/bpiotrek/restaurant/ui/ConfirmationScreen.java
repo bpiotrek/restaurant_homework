@@ -17,7 +17,7 @@ public class ConfirmationScreen extends MenuView {
 
     @Override
     public String getMenuPrompt() {
-        return "[Yn]: ";
+        return "[Y|n]: ";
     }
 
     @Override
