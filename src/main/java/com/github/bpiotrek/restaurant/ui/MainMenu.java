@@ -31,6 +31,7 @@ public class MainMenu extends MenuView {
             case "1" -> setTransition(new SetNewRestaurantNameMenu(DB.getInstance().getRestaurantBuilder()));
             case "2" -> setTransition(new SetNewMealNameMenu(DB.getInstance().getMealBuilder()));
             case "3" -> setTransition(new ListRestaurantsMenu(DB.getInstance()));
+            case "4" -> setTransition(new SelectMealsToListMenu(DB.getInstance()));
             default -> ui.invalidResponse();
         }
     }
