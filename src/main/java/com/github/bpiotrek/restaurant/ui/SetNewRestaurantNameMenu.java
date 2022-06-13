@@ -16,6 +16,16 @@ public class SetNewRestaurantNameMenu extends MenuView {
     }
 
     @Override
+    public String getMenuTitle() {
+        return "Add New Restaurant (set name)";
+    }
+
+    @Override
+    public String getMenuText() {
+        return "Provide name for the restaurant you would like to add.\n";
+    }
+
+    @Override
     public void acceptInput(final String input) {
         restaurantBuilder.setName(input.isBlank() ? "unnamed" : input);
         setTransition(new SetNewRestaurantAddressMenu(restaurantBuilder));

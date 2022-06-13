@@ -11,6 +11,16 @@ public class SelectMealsToListMenu extends MenuView {
     }
 
     @Override
+    public String getMenuText() {
+        return "Select restaurant you would like to list meals for.\n";
+    }
+
+    @Override
+    public String getMenuTitle() {
+        return "Meals List (Select restaurant)";
+    }
+
+    @Override
     public String getMenuPrompt() {
         return "Restaurant ID: ";
     }
@@ -21,7 +31,7 @@ public class SelectMealsToListMenu extends MenuView {
             int restaurantID = Integer.parseInt(input);
             setTransition(new ListMealsMenu(db, restaurantID));
         } catch (NumberFormatException ignored) {
-            ui.invalidResponse();
+            ui.invalidResponse("invalid restaurant ID: ");
         }
     }
 }

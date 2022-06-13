@@ -7,6 +7,11 @@ public class UpdateRestaurantNameMenu extends MenuView {
     private final DB db;
     private final int restaurantID;
 
+    @Override
+    public String getMenuTitle() {
+        return "Change Restaurant's name.";
+    }
+
     public UpdateRestaurantNameMenu(final DB db, final int restaurantID) {
         this.db = db;
         this.restaurantID = restaurantID;
@@ -14,12 +19,13 @@ public class UpdateRestaurantNameMenu extends MenuView {
 
     @Override
     public String getMenuPrompt() {
-        return "New restaurant name [current]: ";
+        final var restaurant = db.getRestaurant(restaurantID);
+        return "New restaurant name [" + restaurant.name() + "]: ";
     }
 
     @Override
     public void acceptInput(final String input) {
-        if(input.isBlank()) {
+        if (input.isBlank()) {
             return;
         }
 

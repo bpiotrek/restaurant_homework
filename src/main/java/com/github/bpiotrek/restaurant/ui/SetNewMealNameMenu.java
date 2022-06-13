@@ -11,6 +11,16 @@ public class SetNewMealNameMenu extends MenuView {
     }
 
     @Override
+    public String getMenuTitle() {
+        return "Add New Meal (set name)";
+    }
+
+    @Override
+    public String getMenuText() {
+        return "Provide name for the meal you would like to create.\n";
+    }
+
+    @Override
     public String getMenuPrompt() {
         return "Meal name [unknown]: ";
     }

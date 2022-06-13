@@ -27,7 +27,7 @@ public class DB {
         restaurants.put(id, new RestaurantEntity(id, restaurant));
     }
 
-    public int fetchNewRestaurantID() {
+    private int fetchNewRestaurantID() {
         return restaurantCounter++;
     }
 
@@ -43,12 +43,12 @@ public class DB {
         return restaurants.values();
     }
 
-    public void insertMeal(Meal meal) {
+    void insertMeal(Meal meal) {
         final var id = fetchNewMealID();
         meals.put(id, new MealEntity(id, meal));
     }
 
-    public int fetchNewMealID() {
+    private int fetchNewMealID() {
         return mealCounter++;
     }
 
@@ -62,6 +62,10 @@ public class DB {
 
     public boolean hasRestaurant(final int restaurantID) {
         return restaurants.containsKey(restaurantID);
+    }
+
+    public RestaurantEntity getRestaurant(final int restaurantID) {
+        return restaurants.get(restaurantID);
     }
 
     public void updateRestaurantName(final int restaurantID, final String newName) {

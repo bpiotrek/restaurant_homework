@@ -10,6 +10,16 @@ public class SetNewMealPriceMenu extends MenuView {
         this.mealBuilder = mealBuilder;
     }
 
+    @Override
+    public String getMenuTitle() {
+        return "Add New Meal (set price)";
+    }
+
+    @Override
+    public String getMenuText() {
+        return "Provide price for the new meal you would like to create.\n";
+    }
+
     public String getMenuPrompt() {
         return "Meal price [0.00]: ";
     }
@@ -21,7 +31,7 @@ public class SetNewMealPriceMenu extends MenuView {
             try {
                 price = Double.parseDouble(input);
             } catch (NumberFormatException ignored) {
-                ui.invalidResponse();
+                ui.invalidResponse("wrong value format: ");
                 return;
             }
         }

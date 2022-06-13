@@ -10,6 +10,16 @@ public class SetNewMealAssignRestaurantMenu extends MenuView {
         this.mealBuilder = mealBuilder;
     }
 
+    @Override
+    public String getMenuText() {
+        return "Select restaurant you would like assign this meal to.\n";
+    }
+
+    @Override
+    public String getMenuTitle() {
+        return "Add New Meal (select restaurant)";
+    }
+
     public String getMenuPrompt() {
         return "Restaurant ID: ";
     }
@@ -20,7 +30,7 @@ public class SetNewMealAssignRestaurantMenu extends MenuView {
             final var id = Integer.parseInt(input);
             mealBuilder.setRestaurantID(id);
         } catch (NumberFormatException ignored) {
-            ui.invalidResponse();
+            ui.invalidResponse("invalid restaurant ID: ");
             return;
         }
 

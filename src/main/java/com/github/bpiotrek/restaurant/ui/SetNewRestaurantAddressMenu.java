@@ -11,6 +11,16 @@ public class SetNewRestaurantAddressMenu extends MenuView {
     }
 
     @Override
+    public String getMenuTitle() {
+        return "Add New Restaurant (set address)";
+    }
+
+    @Override
+    public String getMenuText() {
+        return "Provide address for the restaurant you would like to create.\n";
+    }
+
+    @Override
     public String getMenuPrompt() {
         return "Restaurant address [unknown]: ";
     }

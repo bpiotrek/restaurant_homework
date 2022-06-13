@@ -11,6 +11,11 @@ public class ListRestaurantsMenu extends MenuView {
     }
 
     @Override
+    public String getMenuTitle() {
+        return "Restaurants List";
+    }
+
+    @Override
     public String getMenuText() {
         final var sb = new StringBuilder();
         sb.append("Available restaurants are:\n");

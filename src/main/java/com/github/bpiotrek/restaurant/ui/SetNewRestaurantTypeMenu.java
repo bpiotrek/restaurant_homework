@@ -14,8 +14,13 @@ public class SetNewRestaurantTypeMenu extends MenuView {
     }
 
     @Override
+    public String getMenuTitle() {
+        return "Add New Restaurant (set type)";
+    }
+
+    @Override
     public String getMenuText() {
-        return "Available types: "
+        return "Provide restaurant type for the new restaurant you would like to create.\nAvailable types: "
                 + Arrays.stream(RestaurantType.values()).map(RestaurantType::toString).toList()
                 + "\n";
     }
@@ -32,7 +37,7 @@ public class SetNewRestaurantTypeMenu extends MenuView {
             try {
                 type = RestaurantType.valueOf(input.toUpperCase());
             } catch (IllegalArgumentException ignored) {
-                ui.invalidResponse();
+                ui.invalidResponse("incorrect type: ");
                 return;
             }
         }

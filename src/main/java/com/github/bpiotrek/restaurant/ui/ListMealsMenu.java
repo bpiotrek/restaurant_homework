@@ -7,6 +7,11 @@ public class ListMealsMenu extends MenuView {
     private final DB db;
     private final int restaurantID;
 
+    @Override
+    public String getMenuTitle() {
+        return "Meals List";
+    }
+
     public ListMealsMenu(final DB db, final int restaurantID) {
         this.db = db;
         this.restaurantID = restaurantID;
@@ -15,7 +20,8 @@ public class ListMealsMenu extends MenuView {
     @Override
     public String getMenuText() {
         final var sb = new StringBuilder();
-        sb.append("Available meals for restaurant: ").append(restaurantID).append("\n");
+        final var restaurant = db.getRestaurant(restaurantID);
+        sb.append("Available meals for restaurant: \"").append(restaurant.name()).append("\"\n");
         db.listMeals(restaurantID).forEach(e -> sb
                 .append(e.ID())
                 .append(" - ")

@@ -14,6 +14,7 @@ public class MainMenu extends MenuView {
                 2 - Add new meal to Database.
                 3 - List available restaurants.
                 4 - List available meals per restaurant.
+                5 - Change restaurant's name.
                                 
                 [opt] - default menu option
                 """;

@@ -14,6 +14,8 @@ public class UI {
     private String lastInput;
     private boolean stopApplication = false;
     private boolean invalidInput = false;
+    private String invalidInputMessage = "";
+    private final static String defaultInvalidInputMessage = "response not understood: ";
 
     public UI(BufferedWriter outputWriter, BufferedReader inputReader, MenuView mainMenu) {
         this.outputWriter = outputWriter;
@@ -23,23 +25,16 @@ public class UI {
         this.currentMenu = mainMenu;
     }
 
-    public void write(String message) {
-        try {
-            outputWriter.write(message);
-        } catch (IOException ignored) {
+    public void write(String message) throws IOException {
+        outputWriter.write(message);
 
-        }
     }
 
-    public void flush() {
-        try {
-            outputWriter.flush();
-        } catch (IOException ignored) {
-
-        }
+    public void flush() throws IOException {
+        outputWriter.flush();
     }
 
-    public void writeMessage(String message) {
+    public void writeMessage(String message) throws IOException {
         write(message);
         flush();
     }
@@ -54,40 +49,41 @@ public class UI {
     }
 
     public void invalidResponse() {
+        invalidResponse(defaultInvalidInputMessage);
+    }
+
+    public void invalidResponse(String message) {
+        invalidInputMessage = message;
         invalidInput = true;
     }
 
-    private void clearScreen() {
-        writeMessage("---new screen---\n\033[H\033[2J");
+    private void clearScreen() throws IOException {
+        write("---new screen---\n\033[H\033[2J");
     }
 
     public void endApp() {
         this.stopApplication = true;
     }
 
-    private void runMenu(MenuView menu) {
-        write("   --- " + menu.getMenuTitle() + " ---   \n");
-        write(menu.getMenuText());
-        if (invalidInput) {
-            write("response not understood: " + lastInput + "\n");
-            invalidInput = false;
-        }
-        write(menu.getMenuPrompt());
-        flush();
-        menu.acceptInput(getInput());
-        if (stopApplication || invalidInput) {
-            return;
-        }
-        currentMenu = menu.getTransition();
-        if (currentMenu == null) {
-            currentMenu = mainMenu;
-        }
-    }
-
-    public void runApp() {
+    public void runApp() throws IOException {
         do {
             clearScreen();
-            runMenu(currentMenu);
+            write("   --- " + currentMenu.getMenuTitle() + " ---   \n");
+            write(currentMenu.getMenuText());
+            if (invalidInput) {
+                write(invalidInputMessage + lastInput + "\n");
+                invalidInput = false;
+            }
+            write(currentMenu.getMenuPrompt());
+            flush();
+            currentMenu.acceptInput(getInput());
+            if (stopApplication || invalidInput) {
+                continue;
+            }
+            currentMenu = currentMenu.getTransition();
+            if (currentMenu == null) {
+                currentMenu = mainMenu;
+            }
         } while (!stopApplication);
         writeMessage("Bye, bye!\n");
     }
