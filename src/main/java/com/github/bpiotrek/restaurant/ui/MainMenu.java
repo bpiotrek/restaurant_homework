@@ -11,7 +11,9 @@ public class MainMenu extends MenuView {
                 To navigate, please follow instructions below.
                                 
                 1 - Add new restaurant to Database.
+                2 - Add new meal to Database.
                 3 - List available restaurants.
+                4 - List available meals per restaurant.
                                 
                 [opt] - default menu option
                 """;
@@ -27,6 +29,7 @@ public class MainMenu extends MenuView {
         switch (input.toLowerCase()) {
             case "", "exit" -> ui.endApp();
             case "1" -> setTransition(new SetNewRestaurantNameMenu(DB.getInstance().getRestaurantBuilder()));
+            case "2" -> setTransition(new SetNewMealNameMenu(DB.getInstance().getMealBuilder()));
             case "3" -> setTransition(new ListRestaurantsMenu(DB.getInstance()));
             default -> ui.invalidResponse();
         }

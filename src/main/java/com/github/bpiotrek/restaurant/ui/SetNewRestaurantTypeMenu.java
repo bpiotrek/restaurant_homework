@@ -27,10 +27,8 @@ public class SetNewRestaurantTypeMenu extends MenuView {
 
     @Override
     public void acceptInput(final String input) {
-        RestaurantType type;
-        if (input.isBlank()) {
-            type = RestaurantType.TURKISH;
-        } else {
+        RestaurantType type = RestaurantType.TURKISH;
+        if (!input.isBlank()) {
             try {
                 type = RestaurantType.valueOf(input.toUpperCase());
             } catch (IllegalArgumentException ignored) {

@@ -12,21 +12,21 @@ public class DB {
 
     private static final DB INSTANCE = new DB();
     private final Map<Integer, RestaurantEntity> restaurants = new HashMap<>();
-    private final Map<Integer, Meal> meals = new HashMap<>();
-    private Integer restaurantCounter = 0;
+    private final Map<Integer, MealEntity> meals = new HashMap<>();
+    private int restaurantCounter = 0;
+    private int mealCounter = 0;
     private DB() {
         insertRestaurant(new Restaurant("Kebab u grubego", "Warszawska 11, Kraków 31-222", RestaurantType.TURKISH));
         insertRestaurant(new Restaurant("Milano Pizza", "Sobczyka 12/3, Warszawa 33-312", RestaurantType.ITALIAN));
         insertRestaurant(new Restaurant("Meat Burger", "Lipowa 31b/1, Gdańsk 18-111", RestaurantType.AMERICAN));
     }
-//    private final Map<Integer, Set<Integer>> mealAssoc = new HashMap<>();
 
     public void insertRestaurant(Restaurant restaurant) {
         final var id = fetchNewRestaurantID();
         restaurants.put(id, new RestaurantEntity(id, restaurant));
     }
 
-    public Integer fetchNewRestaurantID() {
+    public int fetchNewRestaurantID() {
         return restaurantCounter++;
     }
 
@@ -43,6 +43,19 @@ public class DB {
     }
 
     public void insertMeal(Meal meal) {
-        meals.put(meals.size(), meal);
+        final var id = fetchNewMealID();
+        meals.put(id, new MealEntity(id, meal));
+    }
+
+    public int fetchNewMealID() {
+        return mealCounter++;
+    }
+
+    public MealEntityBuilder getMealBuilder() {
+        return new MealEntityBuilder(this);
+    }
+
+    public Collection<MealEntity> listMeals(int restaurantID) {
+        return meals.values().stream().filter(m -> m.restaurantID() == restaurantID).toList();
     }
 }

@@ -6,9 +6,9 @@ import com.github.bpiotrek.restaurant.model.RestaurantType;
 public class RestaurantEntity {
 
     private final Restaurant restaurant;
-    private final Integer id;
+    private final int id;
 
-    RestaurantEntity(final Integer id, final Restaurant restaurant) {
+    RestaurantEntity(final int id, final Restaurant restaurant) {
         this.id = id;
         this.restaurant = restaurant;
     }
@@ -25,7 +25,7 @@ public class RestaurantEntity {
         return restaurant.type();
     }
 
-    public Integer ID() {
+    public int ID() {
         return id;
     }
 }

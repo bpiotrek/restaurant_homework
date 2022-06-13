@@ -15,7 +15,7 @@ public class ListRestaurantsMenu extends MenuView {
         final var sb = new StringBuilder();
         sb.append("Available restaurants are:\n");
         db.listRestaurants().forEach(e -> sb
-                .append(e.ID().toString())
+                .append(e.ID())
                 .append(" - ")
                 .append(e.name())
                 .append("; ")
