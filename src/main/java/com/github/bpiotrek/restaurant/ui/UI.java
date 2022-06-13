@@ -58,7 +58,7 @@ public class UI {
     }
 
     private void clearScreen() {
-        writeMessage("---new screen---\n");
+        writeMessage("---new screen---\n\033[H\033[2J");
     }
 
     public void endApp() {
@@ -88,6 +88,6 @@ public class UI {
             clearScreen();
             runMenu(currentMenu);
         } while (!stopApplication);
-        writeMessage("Bye, bye!");
+        writeMessage("Bye, bye!\n");
     }
 }
